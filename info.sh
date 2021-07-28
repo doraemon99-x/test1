@@ -2,4 +2,4 @@
 
 clear
 neofetch
-echo -e "Mod by SL"
+echo -e "DoraGey"
