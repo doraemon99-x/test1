@@ -19,7 +19,7 @@ state=Indonesia
 locality=Indonesia
 organization=SL
 organizationalunit=SL
-commonname=SL
+commonname=0.0.0.0
 email=sulaiman.xl@facebook.com
 
 # simple password minimal
@@ -117,6 +117,8 @@ apt-get -y update
 cd
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g'
 # /etc/ssh/sshd_config
+sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 500' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 40000' /etc/ssh/sshd_config
 sed -i '/Port 22/a Port 51443' /etc/ssh/sshd_config
@@ -129,8 +131,8 @@ echo "===  install Dropbear ==="
 # install dropbear
 apt-get -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
-sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-66 -p 50000 -p 109 -p 77 "/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=44/g' /etc/default/dropbear
+sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 143 -p 50000 -p 109 -p 77 "/g' /etc/default/dropbear
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/ssh restart
@@ -170,9 +172,9 @@ connect = 127.0.0.1:44
 [ssldropbear]
 accept = 777
 connect = 127.0.0.1:77
-[stunnelws]
+[slws]
 accept = 443
-connect = 700
+connect = 127.0.0.1:2096
 [openvpn]
 accept = 992
 connect = 127.0.0.1:1194
@@ -196,7 +198,7 @@ apt-get -y install sslh
 #configurasi sslh
 wget -O /etc/default/sslh "https://raw.githubusercontent.com/fisabiliyusri/Betatest/master/debian9/sslh-conf"
 service sslh restart
-
+/etc/init.d/sslh restart
 
 #OpenVPN
 wget https://raw.githubusercontent.com/${GitUser}/test1/main/install/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh

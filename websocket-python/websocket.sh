@@ -31,9 +31,7 @@ wget -O /usr/local/bin/ws-stunnel https://raw.githubusercontent.com/${GitUser}/t
 wget -O /usr/local/bin/ws-ovpn https://raw.githubusercontent.com/${GitUser}/test1/main/${namafolder}/ws-ovpn && chmod +x /home/admin/ws-ovpn
 #
 chmod +x /usr/local/bin/ws-openssh
-chmod +x /usr/local/bin/ws-openssh
-chmod +x /usr/local/bin/ws-openssh
-chmod +x /usr/local/bin/ws-openssh
+
 cd
 #
 cd
@@ -43,15 +41,16 @@ systemctl enable ws-openssh.service
 systemctl start ws-openssh.service
 systemctl restart ws-openssh.service
 
-#Enable & Start & Restart ws-openssh service
+#Enable & Start & Restart ws-dropbear service
 systemctl enable ws-dropbear.service
 systemctl start ws-dropbear.service
 systemctl restart ws-dropbear.service
 
-#Enable & Start & Restart ws-openssh service
+#Enable & Start & Restart ws-stunnel service
 systemctl enable ws-stunnel.service
 systemctl start ws-stunnel.service
 systemctl restart ws-stunnel.service
+
 
 #Enable & Start ws-ovpn service
 systemctl enable ws-ovpn.service
